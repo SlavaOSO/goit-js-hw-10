@@ -23,10 +23,10 @@ if(nameCountry === "") {
   .then(countries => {
     insertMarkup(countries);
   })
-//     .catch(error => {if(error === "Error 404") {
-//     Notiflix.Notify.failure("Oops, there is no country with that name")
-//   }})
-    .catch(error => Notify.failure(`${error}`))
+    .catch(error => {if(error === "Error 404") {
+    Notiflix.Notify.failure("Oops, there is no country with that name")
+  }})
+    // .catch(error => Notify.failure(`${error}`))
 }
 
 refs.input.addEventListener('input', debounce(onInputSearch, DEBOUNCE_DELAY));

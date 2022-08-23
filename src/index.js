@@ -34,17 +34,17 @@ refs.input.addEventListener('input', debounce(onInputSearch, DEBOUNCE_DELAY));
 const createMaxMarkup = item => `
 <li>
 <img src="${item.flags.svg}" width=70px>
-<p> ${item.name.official}</p>
-<p>Capital: ${item.capital}</p>
-<p>Population: ${item.population}</p>
-<p>Languages: ${Object.values(item.languages)}</p>
+<p><b>${item.name.official}</b></p>
+<p><b>Capital:</b> ${item.capital}</p>
+<p><b>Population:</b> ${item.population}</p>
+<p><b>Languages:</b> ${Object.values(item.languages)}</p>
 </li>
 `;
 
 const createMinMarkup = item => `
 <li>
 <img src="${item.flags.svg}" width=70px>
-<p> ${item.name.official}</p>
+<p> <b>${item.name.official}</b></p>
 </li>
 `;
 

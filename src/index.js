@@ -17,11 +17,13 @@ const nameCountry = e.target.value.trim().toLowerCase();
 
 if(nameCountry === "") {
     cleanMarkup()
-    return;
+    // return;
 }  
   fetchCountries(nameCountry)
-  .then(countries => {
-    insertMarkup(countries);
+      .then(countries => {
+          const result = generateMarkup(countries);
+          refs.list.insertAdjacentHTML('beforeend', result);
+    // insertMarkup(countries);
   })
     .catch(error => {if(error === "Error 404") {
     Notiflix.Notify.failure("Oops, there is no country with that name")
@@ -50,23 +52,27 @@ const createMinMarkup = item => `
 
 
 function generateMarkup(array) {
-    if(array.length > 10) {
-        Notiflix.Notify.info(
-        "Too many matches found. Please enter a more specific name.")} 
+    
+    if(array.length === 1) {
+        return array?.reduce((acc, item) => acc + createMaxMarkup(item), "") 
+    }
 
     else if(array.length >= 2 && array.length <= 10){            
-        return array.reduce((acc, item) => acc + createMinMarkup(item), "")}
+        return array?.reduce((acc, item) => acc + createMinMarkup(item), "")}
 
-     else if(array.length === 1) {
-        return array.reduce((acc, item) => acc + createMaxMarkup(item), "") 
+    
+    else if (array.length > 10) {
+        Notiflix.Notify.info(
+            "Too many matches found. Please enter a more specific name.")
+        return refs.list.innerHTML = "";
     } 
 }
 
 
-function insertMarkup(array) {
-    const result = generateMarkup(array);
-    refs.list.insertAdjacentHTML('beforeend', result);
-}
+// function insertMarkup(array) {
+//     const result = generateMarkup(array);
+//     refs.list.insertAdjacentHTML('beforeend', result);
+// }
 
 function cleanMarkup(){
     refs.list.innerHTML = "";
